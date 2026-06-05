@@ -1,3 +1,6 @@
+> [!NOTE]
+> This repository is a fork of [agrawal-d/cph](https://github.com/agrawal-d/cph) which adds a per-problem option for multi-file compilation support.
+
 # Competitive Programming Helper (cph)
 
 Quickly compile, run and judge competitive programming problems in VS Code.
@@ -11,10 +14,10 @@ TopCoder etc. with the help of competitive companion browser extension
 
 ## Quick start
 
-1. [Install cph](https://marketplace.visualstudio.com/items?itemName=DivyanshuAgrawal.competitive-programming-helper)
+1. ~~[Install cph](https://marketplace.visualstudio.com/items?itemName=DivyanshuAgrawal.competitive-programming-helper)
    in VS Code and open any folder. (Alternatively, the latest `.vsix` is
    available for manual installation at the
-   [latest-vsix release](https://github.com/agrawal-d/cph/releases/tag/latest-vsix).)
+   [latest-vsix release](https://github.com/agrawal-d/cph/releases/tag/latest-vsix).)~~
 1. [Install competitive companion](https://github.com/jmerle/competitive-companion#readme)
    in your browser.
 1. Use Companion by pressing the green plus (+) circle from the browser toolbar
@@ -75,6 +78,10 @@ Interested in adding a new translation? See the
 
 ## Contributing
 
+**Contribute to the [original repository](https://github.com/agrawal-d/cph) instead of this fork.**
+
+<del>
+
 You can contribute to this extension in many ways:
 
 -   File bug reports by creating issues.
@@ -84,10 +91,12 @@ You can contribute to this extension in many ways:
 **Before creating a Pull Request, please create an issue to discuss the
 approach. It makes reviewing and accepting the PR much easier.**
 
-## Telemetry
+</del>
 
-To show live user count, the extension sends a request to the server every few
-seconds. No information is sent with the request.
+## ~~Telemetry~~
+
+<del>To show live user count, the extension sends a request to the server every few
+seconds. No information is sent with the request.</del>
 
 ## License
 
