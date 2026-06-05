@@ -48,6 +48,7 @@ const createLocalProblem = async (editor: vscode.TextEditor) => {
     globalThis.reporter.sendTelemetryEvent(telmetry.NEW_LOCAL_PROBLEM);
     globalThis.logger.log('Creating local problem');
     const srcPath = editor.document.fileName;
+    const interactorPath = undefined;
     if (checkUnsupported(srcPath)) {
         return;
     }
@@ -70,6 +71,7 @@ const createLocalProblem = async (editor: vscode.TextEditor) => {
         memoryLimit: 1024,
         timeLimit: 3000,
         srcPath,
+        interactorPath,
         group: 'local',
         local: true,
     };

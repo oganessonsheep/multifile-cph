@@ -95,6 +95,11 @@ export const translations: Record<string, any> = {
         documentation: 'Documentation',
         customCheckerDescription:
             'Custom checker allows you to use a python script to evaluate testcases. CPH will auto-generate temporary files for testcase input and your code output, and pass their paths to your script.',
+        interactor: 'Interactor',
+        interactorPathPlaceholder: 'Full path to interactor script',
+        interactorDescription:
+            'Interactor is used for C++ multifile compilation. When enabled, CPH compiles with g++ srcPath interactorPath [flags].',
+        interactorEnabled: 'Interactor (Enabled)',
         expectedBehavior:
             'Your script will be called with paths to these files as positional arguments. You can read them like this:',
         exitCodes:

@@ -11,7 +11,10 @@ import { getJudgeViewProvider } from '../extension';
  **/
 export default async (problem: Problem) => {
     globalThis.logger.log('Run all started', problem);
-    const didCompile = await compileFile(problem.srcPath);
+    const didCompile = await compileFile(
+        problem.srcPath,
+        problem.interactorPath,
+    );
     if (!didCompile) {
         return;
     }

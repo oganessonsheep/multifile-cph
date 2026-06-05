@@ -27,6 +27,7 @@ globalThis.logger.debug = (...args: any[]) =>
 
 import * as vscode from 'vscode';
 import { setupCompanionServer } from './companion';
+import { getProblem } from './parser';
 import runTestCases from './runTestCases';
 import {
     editorChanged,
@@ -93,7 +94,9 @@ const registerCommands = (context: vscode.ExtensionContext) => {
             if (checkUnsupported(srcPath)) {
                 return;
             }
-            await compileFile(srcPath);
+            const problem = getProblem(srcPath);
+            const interactorPath = problem!.interactorPath;
+            await compileFile(srcPath, interactorPath);
         },
     );
 

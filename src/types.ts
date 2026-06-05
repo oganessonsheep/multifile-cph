@@ -97,6 +97,7 @@ export type Problem = {
     group: string;
     tests: TestCase[];
     srcPath: string;
+    interactorPath?: string;
     local?: boolean;
     customCheckerPath?: string;
 };

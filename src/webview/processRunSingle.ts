@@ -23,6 +23,7 @@ export const runSingleAndSave = async (
     }
     globalThis.logger.log('Run and save started', problem, id);
     const srcPath = problem.srcPath;
+    const interactorPath = problem.interactorPath;
     const language = getLanguage(srcPath);
     const binPath = getBinSaveLocation(srcPath);
     const idx = problem.tests.findIndex((value) => value.id === id);
@@ -40,7 +41,7 @@ export const runSingleAndSave = async (
     saveProblem(srcPath, problem);
 
     if (!skipCompile) {
-        if (!(await compileFile(srcPath))) {
+        if (!(await compileFile(srcPath, interactorPath))) {
             globalThis.logger.error('Failed to compile', problem, id);
             return;
         }

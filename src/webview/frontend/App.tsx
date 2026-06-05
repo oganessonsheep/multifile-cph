@@ -118,6 +118,11 @@ function Judge(props: {
     );
     const checkerInputRef = React.useRef<HTMLInputElement>(null);
 
+    const [interactorVisible, setInteractorVisible] = useState<boolean>(
+        !!problem.interactorPath,
+    );
+    const interactorInputRef = React.useRef<HTMLInputElement>(null);
+
     const numPassed = cases.filter(
         (testCase) => testCase.result?.pass === true,
     ).length;
@@ -480,6 +485,13 @@ function Judge(props: {
         });
     };
 
+    const updateInteractorPath = (path: string) => {
+        updateProblem({
+            ...problem,
+            interactorPath: path,
+        });
+    };
+
     const notify = (text: string) => {
         clearTimeout(notificationTimeout!);
         setNotification(text);
@@ -505,6 +517,26 @@ function Judge(props: {
             sendMessageToVSCode({
                 command: 'open-file',
                 path: checkerPath,
+            });
+        }
+    };
+
+    const toggleInteractor = () => {
+        const nextVisible = !interactorVisible;
+        setInteractorVisible(nextVisible);
+        if (nextVisible) {
+            setTimeout(() => {
+                interactorInputRef.current?.focus();
+            }, 100);
+        }
+    };
+
+    const openInteractorFile = () => {
+        const interactorPath = problem.interactorPath?.trim();
+        if (interactorPath) {
+            sendMessageToVSCode({
+                command: 'open-file',
+                path: interactorPath,
             });
         }
     };
@@ -909,6 +941,23 @@ function Judge(props: {
                             ? t('customCheckerEnabled')
                             : t('customChecker')}
                     </button>
+                    <button
+                        className={`btn btn-block ${
+                            problem.interactorPath?.trim() ? 'btn-orange' : ''
+                        }`}
+                        onClick={toggleInteractor}
+                    >
+                        <span className="icon">
+                            <i
+                                className={`codicon codicon-chevron-${
+                                    interactorVisible ? 'up' : 'down'
+                                }`}
+                            ></i>
+                        </span>{' '}
+                        {problem.interactorPath?.trim()
+                            ? t('interactorEnabled')
+                            : t('interactor')}
+                    </button>
                 </div>
                 {checkerVisible && (
                     <div className="pad-10 custom-checker-area">
@@ -1012,6 +1061,89 @@ with open(sys.argv[2], "r") as f:
                                             display: 'block',
                                         }}
                                     />
+                                    <br />
+                                    <a
+                                        href="https://github.com/agrawal-d/cph/blob/main/docs/user-guide.md#custom-checker"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="btn btn-black"
+                                        style={{
+                                            fontSize: '0.9em',
+                                            display: 'inline-block',
+                                        }}
+                                    >
+                                        <i className="codicon codicon-book"></i>{' '}
+                                        {t('documentation')}
+                                    </a>
+                                </small>
+                            </div>
+                        </details>
+                    </div>
+                )}
+                {interactorVisible && (
+                    <div className="pad-10 custom-checker-area">
+                        <div
+                            style={{
+                                display: 'flex',
+                                gap: '5px',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <input
+                                type="text"
+                                className="selectable"
+                                placeholder={t('interactorPathPlaceholder')}
+                                value={problem.interactorPath || ''}
+                                onChange={(e) =>
+                                    updateInteractorPath(e.target.value)
+                                }
+                                ref={interactorInputRef}
+                                style={{
+                                    flexGrow: 1,
+                                    width: '0',
+                                    padding: '4px 6px',
+                                }}
+                            />
+                            <button
+                                className="btn-chromeless"
+                                title="Open the interactor script"
+                                onClick={openInteractorFile}
+                                disabled={!problem.interactorPath?.trim()}
+                            >
+                                <span
+                                    className="icon"
+                                    style={{
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    <i className="codicon codicon-link-external"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <details style={{ marginTop: '10px' }}>
+                            <summary
+                                style={{
+                                    cursor: 'pointer',
+                                    fontSize: '0.9em',
+                                    opacity: 0.8,
+                                }}
+                            >
+                                {t('usageInstructions')}
+                            </summary>
+                            <div style={{ marginTop: '10px' }}>
+                                <small>
+                                    {t('interactorDescription')}
+                                    <br />
+                                    <br />
+                                    {t('invocationFormat')}:
+                                    <br />
+                                    <code>
+                                        g++ &lt;src-path&gt;
+                                        &lt;interactor-path&gt; [flags]
+                                    </code>
+                                    <br />
                                     <br />
                                     <a
                                         href="https://github.com/agrawal-d/cph/blob/main/docs/user-guide.md#custom-checker"
