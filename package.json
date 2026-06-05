@@ -1,11 +1,11 @@
 {
-    "name": "competitive-programming-helper",
-    "displayName": "Competitive Programming Helper (cph)",
+    "name": "multifile-fork-competitive-programming-helper",
+    "displayName": "Competitive Programming Helper - With Multifile Support (m-cph)",
     "description": "Makes judging, compiling, and downloading problems for competitve programming easy. Also supports auto-submit for a few sites.",
     "license": "GPL-3.0-or-later",
     "icon": "icon.png",
-    "publisher": "DivyanshuAgrawal",
-    "version": "2077.0.0",
+    "publisher": "anonymous",
+    "version": "0.0.1",
     "engines": {
         "vscode": "^1.52.0"
     },
@@ -15,9 +15,6 @@
     "activationEvents": [
         "*"
     ],
-    "sponsor": {
-        "url": "https://rb.gy/5iiorz"
-    },
     "main": "dist/extension.js",
     "contributes": {
         "viewsContainers": {
